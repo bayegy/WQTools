@@ -21,7 +21,7 @@ class By(Enum):
 
 
 class Adb:
-    def __init__(self, port=None, device=None):
+    def __init__(self,password="94736a", port=None, device=None):
         self._port = port
         self._device = device
 
@@ -40,6 +40,8 @@ class Adb:
 
         self._x = None
         self._y = None
+
+        self._password=password
 
     def printf(self):
         print(self._port)
@@ -66,6 +68,9 @@ class Adb:
     def adb_refresh(self):
         os.system(self._baseShell + 'shell uiautomator dump /sdcard/dump.xml')
         os.system(self._baseShell + 'pull /sdcard/dump.xml ' + self._basePath + '/data/dump.xml')
+
+    def adb_swipe(self,vector):
+        os.system(self._baseShell + 'shell input swipe ' + vector)
 
     def parse_xml(self):
         self._xml = xmlParser.ElementTree(file=self._basePath + '/data/dump.xml')
@@ -134,3 +139,10 @@ class Adb:
     def click_by_content_after_refresh(self, content, index=None):
         self.refresh_nodes()
         self.click_by_content(content, index)
+
+    def unlock(self):
+        self.adb_keyboard(82)
+        self.adb_swipe("900 250 50 250")
+        self.adb_input(self._password)
+
+

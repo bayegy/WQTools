@@ -69,7 +69,7 @@ class Main:
 
         # 输入号码
         self._adb.adb_input(phone)
-        time.sleep(randint(1,3))
+        time.sleep(random.randint(1,3))
         # 点击搜索
         self._adb.click_by_text_after_refresh('搜索:' + phone)
         time.sleep(3+random.randint(1,3))
