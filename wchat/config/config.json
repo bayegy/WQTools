@@ -1,0 +1,9 @@
+{
+	"mode": "file",
+	"account": ["+8617376509219", "xiaomihehuo"],
+	"loop": [18511089868, 18511089899],
+	"file": "/data/name.txt",
+	"dump": 10,
+	"sleep": 30,
+	"sleep-flag": 4
+}
