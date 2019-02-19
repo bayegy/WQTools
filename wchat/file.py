@@ -35,7 +35,7 @@ class File:
 #        with self.open(path='/result/' + stamp + '/' + key + '.txt', mode='a') as f:
         for e in _list:
             self._fileobject[key].write(str(e) + '\n')
-            self._fileobject[key].flush()
+        self._fileobject[key].flush()
 #            f.close()
         # 清空列表
         _list.clear()
@@ -49,10 +49,13 @@ class File:
         self._failed_file.close()
         self._success_file.close()
     def get_done_list(self):
-        with self.open('/result/success_list.txt','r') as f:
-            o=f.read()
-            o=re.split('\n',o)[:-1]
-        with self.open('/result/failed_list.txt','r') as f:
-            for line in f:
-                o.append(re.split('\t',line.strip())[0])
-        return [i.strip() for i in o]
+        try:
+            with self.open('/result/success_list.txt','r') as f:
+                o=f.read()
+                o=re.split('\n',o)[:-1]
+            with self.open('/result/failed_list.txt','r') as f:
+                for line in f:
+                    o.append(re.split('\t',line.strip())[0])
+            return [i.strip() for i in o]
+        except Exception:
+            return []

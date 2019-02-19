@@ -12,7 +12,7 @@ import re
 from plat import adb_path
 from enum import Enum
 import xml.etree.cElementTree as xmlParser
-
+import time
 
 class By(Enum):
     text = 'text'
@@ -49,6 +49,9 @@ class Adb:
         print(self._p)
         print(self._s)
         print(self._baseShell)
+
+    def adb_shell(self,command):
+        os.system(self._baseShell + 'shell ' + str(command))
 
     def adb_keyboard(self, event):
         os.system(self._baseShell + 'shell input keyevent ' + str(event))
@@ -144,5 +147,13 @@ class Adb:
         self.adb_keyboard(82)
         self.adb_swipe("900 250 50 250")
         self.adb_input(self._password)
+
+    def changeip(self):
+        self.adb_shell('settings put global airplane_mode_on 1')
+        self.adb_shell('am broadcast -a android.intent.action.AIRPLANE_MODE --ez state true')
+        time.sleep(2)
+        self.adb_shell('settings put global airplane_mode_on 0')
+        self.adb_shell('am broadcast -a android.intent.action.AIRPLANE_MODE --ez state false')
+        time.sleep(3)
 
 

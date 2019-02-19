@@ -1,9 +1,11 @@
 {
 	"mode": "file",
-	"account": ["+8617376509219", "xiaomihehuo"],
+	"account": ["wxid_73238nd75bc222", "+8618511089846"],
 	"loop": [18511089868, 18511089899],
 	"file": "/data/name.txt",
 	"dump": 10,
-	"sleep": 30,
+	"password": "94736a",
+	"switch-when": 15,
+	"sleep-time": 30,
 	"sleep-flag": 4
 }
